@@ -1,5 +1,6 @@
 import React from 'react';
 import CommentRow from './CommentRow';
+import EditRow from './EditRow';
 import './ListStyle';
 
 class List extends React.Component {
@@ -25,6 +26,7 @@ class List extends React.Component {
         });
         return (<ul className="ul_st">
             {items}
+            <EditRow />
         </ul>);
     }
 }
