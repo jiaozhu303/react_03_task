@@ -8,6 +8,12 @@ class EditRow extends React.Component {
         this.state = {'curr':this.props.curr};
     }
 
+    componentWillReceiveProps(nextProps){
+        console.log("有属性props更新");
+        console.log(nextProps);
+        this.state = {'curr':nextProps.curr};
+    }
+
     render() {
 
         const styles = {
@@ -15,7 +21,8 @@ class EditRow extends React.Component {
         };
 
         const {save} = this.props;
-
+        console.log('EditRow: ');
+        console.log(this.state.curr);
 
         return (<li className="row" style={styles}>
             <input type="text" className="li_in" value={this.state.curr.content}/>

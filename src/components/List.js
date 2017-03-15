@@ -12,12 +12,12 @@ class List extends React.Component {
         this.edit = this.edit.bind(this);
         this.save = this.save.bind(this);
         this.getId = this.getId.bind(this);
-        this.add = this.add.bind(this);
+        // this.add = this.add.bind(this);
     }
 
-    add(){
-        this.setState({'data': this.state.data, 'curr': {}});
-    }
+    // add(){
+    //     this.setState({'data': this.state.data, 'curr': {}});
+    // }
 
     deleteRow(e) {
         const id = e.target.value;
@@ -27,8 +27,8 @@ class List extends React.Component {
 
     edit(e) {
         const id = e.target.value;
-        const newData = this.state.data.filter((item) => item.id === Number(id));
-        this.setState({'data': this.state.data, 'curr': newData[0]});
+        const newData = this.state.data.find((item) => item.id === Number(id));
+        this.setState({'data': this.state.data, 'curr': newData});
     }
 
     save(e) {
@@ -64,14 +64,18 @@ class List extends React.Component {
         let deleteRow = this.deleteRow;
         let edit = this.edit;
         let save = this.save;
-        let add = this.add;
+        const currData = this.state.curr;
+        // let add = this.add;
+        console.log('List: ');
+        console.log(this.state.curr);
         const items = this.state.data.map(function (row, index) {
             return <CommentRow row={row} key={index} deleteRow={deleteRow} editRow={edit}/>;
         });
+
         return (<ul className="ul_st">
             {items}
-            <EditRow curr={this.state.curr} save={save}/>
-            <button onClick={add}>新增</button>
+            <EditRow curr={currData} save={save}/>
+            <button >新增</button>
         </ul>);
     }
 }

@@ -1,7 +1,7 @@
 var path = require('path');
 var webpack = require('webpack');
 var htmlWebpackPlugin = require('html-webpack-plugin');
-var openBrowserPlugin = require('open-browser-webpack-plugin');
+// var openBrowserPlugin = require('open-browser-webpack-plugin');
 var extractTextWebpackPlugin = require('extract-text-webpack-plugin');
 var uglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
 
@@ -17,9 +17,9 @@ var webpackPlugins = [
         title: 'react 学习 03',
         template: path.resolve(__dirname, "./src/index.html")
     }),
-    new openBrowserPlugin({
-        url: 'http://localhost:'+ port
-    }),
+    // new openBrowserPlugin({
+    //     url: 'http://localhost:'+ port
+    // }),
     new webpack.BannerPlugin('作者：zhaodj\n日期：'+ new Date().toLocaleString()),
     new extractTextWebpackPlugin("styles.css")
 ];
