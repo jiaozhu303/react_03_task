@@ -24,14 +24,16 @@ class EditRow extends React.Component {
         console.log('EditRow: ');
         console.log(this.state.curr);
 
+        const curr  = this.state.curr;
+
         return (<li className="row" style={styles}>
-            <input type="text" className="li_in" value={this.state.curr.content}/>
+            <input type="text" className="li_in" value={curr.content}/>
             <select name="color" className="li_sel">
-                <option value="red" selected={this.state.curr.bgColor === 'red'}>red</option>
-                <option value="blue" selected={this.state.curr.bgColor === 'blue'}>blue</option>
-                <option value="green" selected={this.state.curr.bgColor === 'green'}>green</option>
+                <option value="red" selected={curr.bgColor === 'red'}>red</option>
+                <option value="blue" selected={curr.bgColor === 'blue'}>blue</option>
+                <option value="green" selected={curr.bgColor === 'green'}>green</option>
             </select>
-            <button onClick={save} >保存</button>
+            <button onClick={save} value={curr.id+"-"+curr.content+"-"+curr.bgColor}>保存</button>
         </li>);
     }
 }
