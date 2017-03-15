@@ -5,11 +5,11 @@ class CommentRow extends React.Component {
     constructor(props) {
         super(props);
         this.props = props;
-        console.log(this.props);
     }
 
     render() {
         const item = this.props.row;
+        const {deleteRow, editRow} = this.props;
 
         const styles = {
             backgroundColor: item.bgColor
@@ -17,9 +17,9 @@ class CommentRow extends React.Component {
 
         return (<li className="row" style={styles}>
             {item.content}
-            <button onClick={() => this.props.deleteFn(item.id)}>编辑</button>
-            <button>删除</button>
-            </li>);
+            <button onClick={editRow} value={item}>编辑</button>
+            <button onClick={deleteRow} value={item.id}>删除</button>
+        </li>);
     }
 }
 
