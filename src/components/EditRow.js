@@ -20,6 +20,7 @@ class EditRow extends React.Component {
                 <option value="blue">blue</option>
                 <option value="green">green</option>
             </select>
+            <button>保存</button>
         </li>);
     }
 }
