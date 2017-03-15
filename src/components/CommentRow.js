@@ -17,7 +17,7 @@ class CommentRow extends React.Component {
 
         return (<li className="row" style={styles}>
             {item.content}
-            <button onClick={editRow} value={item}>编辑</button>
+            <button onClick={editRow} value={item.id}>编辑</button>
             <button onClick={deleteRow} value={item.id}>删除</button>
         </li>);
     }
