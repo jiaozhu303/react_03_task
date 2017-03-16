@@ -1,14 +1,21 @@
 import React from 'react';
 import CommentRow from './CommentRow';
 import EditRow from './EditRow';
-import _ from 'lodash';
 import './ListStyle';
 
 class List extends React.Component {
     constructor(props) {
         super(props);
         this.props = props;
-        this.state = {'data': props.data, 'curr': {}};
+        this.state = {
+            'data': props.data,
+            'curr': {
+                id: '',
+                content: '',
+                bgColor: ''
+            },
+            'del': false
+        };
         this.deleteRow = this.deleteRow.bind(this);
         this.edit = this.edit.bind(this);
         this.save = this.save.bind(this);
@@ -16,14 +23,30 @@ class List extends React.Component {
         this.add = this.add.bind(this);
     }
 
-    add(){
-        this.setState({'data': this.state.data, 'curr': {}});
+    add() {
+        this.setState({
+            'data': this.state.data,
+            'curr': {
+                id: '',
+                content: '',
+                bgColor: ''
+            },
+            'del': false
+        });
     }
 
     deleteRow(e) {
         const id = e.target.value;
         const newData = this.state.data.filter((item) => item.id !== Number(id));
-        this.setState({'data': newData, 'curr': {}});
+        this.setState({
+            'data': newData,
+            'curr': {
+                id: '',
+                content: '',
+                bgColor: ''
+            },
+            'del': false
+        });
     }
 
     edit(e) {
@@ -32,22 +55,28 @@ class List extends React.Component {
         this.setState({'data': this.state.data, 'curr': newData});
     }
 
-    save(e) {
-        console.log(e);
-        console.log(this.refs.EditRow);
-        const item = e.target.value.split("-");
-        if (item.id) {
+    save(obj, e) {
+        const item = obj;
+        if (item.id && item.content) {
             this.state.data.forEach((val) => {
                 if (val.id === item.id) {
                     val.content = item.content;
                     val.bgColor = item.bgColor;
                 }
             });
-        } else {
+        } else if (!item.id && item.content) {
             item.id = this.getId(this.state.data);
             this.state.data.push(item);
         }
-        this.setState({'data': this.state.data, 'curr': {}});
+        this.setState({
+            'data': this.state.data,
+            'curr': {
+                id: '',
+                content: '',
+                bgColor: ''
+            },
+            'del': false
+        });
     }
 
     getId(obj) {
@@ -65,17 +94,16 @@ class List extends React.Component {
         let deleteRow = this.deleteRow;
         let edit = this.edit;
         let save = this.save;
-        const currData = _.cloneDeep(this.state.curr);
+        const currData = this.state.curr;
+        const del = this.state.del;
         let add = this.add;
-        console.log('List: ');
-        console.log(this.state.curr);
         const items = this.state.data.map(function (row, index) {
             return <CommentRow row={row} key={index} deleteRow={deleteRow} editRow={edit}/>;
         });
 
         return (<ul className="ul_st">
             {items}
-            <EditRow curr={currData} save={save}/>
+            <EditRow curr={currData} save={save} del={del}/>
             <button onClick={add}>新增</button>
         </ul>);
     }
